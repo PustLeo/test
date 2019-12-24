@@ -1,0 +1,11 @@
+<h4 mat-dialog-title>{{data?.Title}}</h4>
+<div mat-dialog-content>
+  <img mat-card-image *ngIf="!!data.Poster && data.Poster !== 'N/A'" [src]="data.Poster">
+  <ng-container *ngFor="let element of data | videoInfo | keyvalue; trackBy: trackByFn;">
+    <h4 mat-line>{{element.key}}</h4>
+    <p mat-line [innerHTML]="element.value"></p>
+  </ng-container>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">Закрыть</button>
+</div>

@@ -1,0 +1,26 @@
+<mat-card>
+  <mat-card-content>
+    <mat-card-content>
+      <mat-form-field>
+        <input type="text" matInput [matAutocomplete]="auto" placeholder="Поиск.." [(ngModel)]="model.search" (ngModelChange)="changeSearchValue()">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of model.searchResult; trackBy: trackByFn;" [value]="''" (onSelectionChange)="addVideoElement(option)">{{option.Title}}</mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-list>
+      <h3 mat-subheader>Мои видео</h3>
+      <ng-container *ngFor="let element of model.list; let elemIndex = index; trackBy: trackByFn;">
+        <mat-list-item routerLink="" [queryParams]="{id: element.imdbID}">
+          <h4 mat-line>{{element.Title}}</h4>
+          <button mat-icon-button (click)="deleteSavedElement($event, elemIndex)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </ng-container>
+    </mat-list>
+  </mat-card-content>
+
+</mat-card>
+<router-outlet></router-outlet>
